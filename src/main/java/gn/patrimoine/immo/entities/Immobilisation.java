@@ -36,7 +36,7 @@ public class Immobilisation {
 	@JoinColumn(name = "categorieImmo_id", nullable=false)
 	private CategorieImmo categorieImmo;
 	
-	@Column(length=100)
+	@Column(length=90)
 	private String libelleImmo;
 	
 	@Column(length=1000)
