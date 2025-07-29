@@ -24,7 +24,7 @@ public class Profil {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id;
 	
-	@Column(length=30)
+	@Column(length=40)
 	private String nomProfil;
 	
 	@OneToMany(mappedBy="profil", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
