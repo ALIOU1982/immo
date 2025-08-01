@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -8,39 +11,54 @@
 		<version>3.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>gn.patrimoine.immo</groupId>
 	<artifactId>immo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>immo</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot</description>	
+	
+	<properties>
+		<java.version>17</java.version>		
+		<project.build.finalName>immo-gn-app</project.build.finalName>
+		<modelmapper.version>3.2.4</modelmapper.version>
+	</properties>
+	
 	<url/>
+	
 	<licenses>
 		<license/>
 	</licenses>
+	
 	<developers>
 		<developer/>
 	</developers>
+	
 	<scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
 		<url/>
 	</scm>
-	<properties>
-		<java.version>17</java.version>		
-	</properties>
+	
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
-  <groupId>org.springframework.data</groupId>
-  <artifactId>spring-data-jpa</artifactId></dependency>
+  			<groupId>org.springframework.data</groupId>
+  			<artifactId>spring-data-jpa</artifactId>
+  		</dependency>
+  		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -52,11 +70,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!--  
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,32 +84,166 @@
 			<scope>test</scope>
 		</dependency>
 		-->
+		
 		<dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId>org.modelmapper</groupId>
-    <artifactId>modelmapper</artifactId>
-    <version>3.2.4</version>
-</dependency>
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.modelmapper</groupId>
+    		<artifactId>modelmapper</artifactId>
+    		<version>${modelmapper.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
+		<finalName>${build.profile.id}-${project.build.finalName}</finalName>
+		
+		<filters>
+			<filter>src/main/resources/profiles/${build.profile.id}/application-${build.profile.id}.properties</filter>
+		</filters>
+		
+		<resources>
+    		<resource>
+        		<directory>src/main/resources</directory>
+        		<filtering>true</filtering>
+    		</resource>
+		</resources>
+		
 		<plugins>
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 			<plugin>
 	    		<artifactId>maven-compiler-plugin</artifactId>
 	    		<configuration>
 	        		<fork>true</fork>
-	        		<executable>C:/Program Files (x86)/Java/jdk17/bin/javac</executable>
-	    		</configuration>
+	        		<executable>C:/Program Files (x86)/Java/jdk17/bin/javac</executable>	        		
+                    <source>17</source>
+                    <target>17</target>
+	    		</configuration>            	
 			</plugin>
+			
+			<!-- Maven Resources Plugin -->
+			<plugin>
+			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<delimiters>
+						<delimiter>${*}</delimiter>
+						<delimiter>@</delimiter>
+					</delimiters>
+				</configuration>
+				
+				<executions>
+				
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						
+						<configuration>
+							<outputDirectory>${basedir}/target/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+									<exclude>*.properties</exclude>
+								</resource>
+							</resources>
+						</configuration>
+						
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Maven WAR Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>${basedir}/profiles/${build.profile.id}/META-INF</directory>
+							<targetPath>META-INF</targetPath>
+						</resource>
+					</webResources>
+	
+				</configuration>
+			</plugin>
+			
 		</plugins>
+		
 	</build>
+	
+	<profiles>
+		
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties> 
+				<finalName>${project.build.finalName}</finalName>
+				<build.profile.id>dev</build.profile.id>
+				<spring.profiles.active>dev</spring.profiles.active>
+				<filtering>true</filtering>
+			</properties>
+			<build>
+            <resources>
+                <resource>
+                    <directory>src/main/resources/profiles/dev/</directory>
+                </resource>
+            </resources>
+        </build>			
+		</profile>
+		
+		<profile>
+			<id>rec</id>
+			<properties>			
+				<finalName>${project.build.finalName}</finalName>
+				<build.profile.id>rec</build.profile.id>
+				<spring.profiles.active>rec</spring.profiles.active>
+				<filtering>true</filtering>
+			</properties>
+			<build>
+            	<resources>
+                	<resource>
+                    	<directory>src/main/resources/profiles/rec/</directory>
+                	</resource>
+            	</resources>
+        	</build>			
+		</profile>
+		
+		<profile>
+			<id>prod</id>
+			<properties>			
+				<finalName>${project.build.finalName}</finalName>
+				<build.profile.id>prod</build.profile.id>
+				<spring.profiles.active>prod</spring.profiles.active>
+				<filtering>true</filtering>
+			</properties>
+			<build>
+            	<resources>
+                	<resource>
+                    	<directory>src/main/resources/profiles/prod/</directory>
+                	</resource>
+            	</resources>
+        	</build>			
+		</profile>
+		
+	</profiles>
 
 </project>
