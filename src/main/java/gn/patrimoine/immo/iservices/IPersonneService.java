@@ -10,10 +10,12 @@ import gn.patrimoine.immo.entities.Personne;
  * @author user
  *
  */
-public interface PersonneService {
+public interface IPersonneService {
 	
 	public PersonneDto mapToDto(Personne personne);
 	
 	public Personne mapToEntity(PersonneDto personneDto);
+	
+	public Personne findById(Long Id);
 
 }

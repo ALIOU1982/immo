@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import gn.patrimoine.immo.dto.ProfilDto;
 import gn.patrimoine.immo.entities.Profil;
-import gn.patrimoine.immo.iservices.ProfilService;
+import gn.patrimoine.immo.iservices.IProfilService;
 import gn.patrimoine.immo.repositories.ProfilRepository;
 
 /**
  * @author user
  *
  */
-public class ProfilServiceImpl  implements ProfilService{
+public class ProfilService  implements IProfilService{
 	
 	@Autowired
 	private ProfilRepository profilRepository;

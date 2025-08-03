@@ -5,7 +5,7 @@ import java.util.List;
 import gn.patrimoine.immo.dto.ProfilDto;
 import gn.patrimoine.immo.entities.Profil;
 
-public interface ProfilService {
+public interface IProfilService {
 	
 	ProfilDto findById(Long id);
 	
