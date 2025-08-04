@@ -17,5 +17,4 @@ public class ImmoApplication {
     public ModelMapper getModelMapper() {
         return new ModelMapper();
     }
-
-}
+ }

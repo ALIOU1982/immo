@@ -1,0 +1,9 @@
+Compile: mvn compile exec:java -Dexec.mainClass="gn.patrimoine.immo.ImmoApplication"
+
+Build: mvn clean install exec:java -Dexec.mainClass="gn.patrimoine.immo.ImmoApplication"
+
+Spring-Boot: mvn spring-boot:run exec:java -Dexec.mainClass="gn.patrimoine.immo.ImmoApplication"
+
+Port Ouvert: netstat -a -o -n 
+
+TUER Le PROCESS: taskkill /F /PID <<PID>>

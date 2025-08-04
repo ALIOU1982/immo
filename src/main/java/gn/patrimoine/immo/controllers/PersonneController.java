@@ -39,5 +39,9 @@ public class PersonneController implements IPersonneController{
 		// TODO Auto-generated method stub
 		return new ResponseEntity<>(modelMapper.map(personneService.findById(Id), PersonneDto.class), HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/home")
+	public String  getHome(){
+		return "Page d'Accueil";		
+	}
 }
