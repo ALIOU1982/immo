@@ -72,5 +72,8 @@ public class Personne {
 	
 	@OneToMany(mappedBy="supprimerPar", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
 	private Set<Immobilisation> suppressions  = new HashSet<>();
+	
+	@OneToMany(mappedBy="envoieA", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
+	private Set<Messages> messages  = new HashSet<>();
 
 }

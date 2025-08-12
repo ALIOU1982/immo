@@ -1,0 +1,58 @@
+/**
+ * 
+ */
+package gn.patrimoine.immo.services;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import gn.patrimoine.immo.dto.RegionDto;
+import gn.patrimoine.immo.entities.Region;
+import gn.patrimoine.immo.iservices.IRegionService;
+import gn.patrimoine.immo.repositories.RegionRepository;
+
+/**
+ * @author user
+ *
+ */
+@Service
+public class RegionService implements IRegionService{
+	
+	@Autowired
+	private RegionRepository regionRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+
+	/* (non-Javadoc)
+	 * @see gn.patrimoine.immo.iservices.IRegionService#saveRegion(gn.patrimoine.immo.entities.Region)
+	 */
+	@Override
+	public void saveRegion(RegionDto regionDto) {
+		// TODO Auto-generated method stub
+		regionRepository.save(modelMapper.map(regionDto, Region.class));
+	}
+
+	/* (non-Javadoc)
+	 * @see gn.patrimoine.immo.iservices.IRegionService#findRegion(java.lang.Long)
+	 */
+	@Override
+	public RegionDto findRegion(Long Id) {
+		// TODO Auto-generated method stub
+		return modelMapper.map(regionRepository.findById(Id).get(), RegionDto.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see gn.patrimoine.immo.iservices.IRegionService#allRegions()
+	 */
+	@Override
+	public List<RegionDto> allRegions() {
+		// TODO Auto-generated method stub
+		return Arrays.asList(modelMapper.map(regionRepository.findAll(), RegionDto.class));
+	}
+
+}

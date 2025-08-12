@@ -1,6 +1,8 @@
 package gn.patrimoine.immo.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -82,4 +85,7 @@ public class Immobilisation {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "personne_supprime_id", nullable=true)
 	private Personne supprimerPar;
+	
+	@OneToMany(mappedBy="immobilisation", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
+	private Set<ValorisationImmo> valorisationImmos = new HashSet<>();
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Liste de toutes les régions</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Regions</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="container">
+			<h1>Regions</h1>
+			<a href="/adresse/creeRegion" class="btn btn-primary">Ajouter region</a>
+			
+			<table class="table mt3">
+				<thead>
+				
+				<tr>
+					<th>Nom Région</th>
+					<th>Actions</th>
+				</tr>
+				
+				</thead>
+				<tbody>
+					<tr th:each="region, status: ${regions}">
+						<td th:text="${region.nomRegion}"></td>
+						<td> 
+							<a th:href="@{adresse/editeRegion/{id}(id=${region.id})}" class="btn btn-primary">Modifier Region</a>
+							<a th:href="@{adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary">Supprimer Region</a>
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+	
+</html>
