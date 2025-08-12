@@ -8,21 +8,23 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	
-	<body>
-	<!-- 
+	<body> 
 		<div class="container">
 			<h1>Ajouter</h1>
-			<form action="@{adresse/createRegion}" th:object="nRegion" method="post">
+			<form th:action="@{/adresse/createRegion}" th:object="${nRegion}" method="post">
+			
 				<div class="form-group">
 					<label for="nomRegion">nomRegion</label>
 					<input type="text" id="nomRegion" th:field="*{nomRegion}" class="form-control">
-					<div th:if="th:${#fields.hasErrors('nomRegion')}" th:errors="*{nomRegion}" class="text-danger"></div>
-				</div>
-			</form>
-			
+					<div th:if="${#fields.hasErrors('nomRegion')}" th:errors="*{nomRegion}" class="text-danger"></div>
+				</div> 
+				 
+				<button type="submit" class="btn btn-primary">Enregistrer</button>
+				<button href="/adresse/listeRegions" class="btn btn-secondary">Annuler</button> 
+				
+			</form>			
 			
 		</div>
-	 -->
 	</body>
 	
 </html>

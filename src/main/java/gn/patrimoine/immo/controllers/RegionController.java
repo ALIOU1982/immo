@@ -31,7 +31,7 @@ public class RegionController implements IRegionController{
 	 * @see gn.patrimoine.immo.icomtrollers.IRegionController#saveRegion(gn.patrimoine.immo.dto.RegionDto)
 	 */
 	@Override
-	@PostMapping("/createRegion")
+	@PostMapping("/createRegion2")
 	public ModelAndView saveRegion(@Valid @ModelAttribute  RegionForm regionForm, BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
 		RegionDto regionDto = new RegionDto();

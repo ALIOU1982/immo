@@ -53,11 +53,11 @@ public class AdresseController  implements IAdresseController{
 	@PostMapping("/createRegion")
 	public String saveRegion(@Valid @ModelAttribute("nRegion")  RegionDto regionDto, BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Sauve Regions Test "+regionDto.getNomRegion());
 		if (bindingResult.hasErrors()) {
 	        return "adresse/creeRegion";
 	    }
-		
+		System.out.println("Sauve Regions "+regionDto.getNomRegion());
 		regionService.saveRegion(regionDto);
 		
 		return "redirect:/adresse/listeRegions";

@@ -3,6 +3,7 @@
  */
 package gn.patrimoine.immo.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class RegionService implements IRegionService{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#saveRegion(gn.patrimoine.immo.entities.Region)
 	 */
-	@Override
 	public void saveRegion(RegionDto regionDto) {
 		// TODO Auto-generated method stub
 		regionRepository.save(modelMapper.map(regionDto, Region.class));
@@ -40,19 +40,22 @@ public class RegionService implements IRegionService{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#findRegion(java.lang.Long)
 	 */
-	@Override
 	public RegionDto findRegion(Long Id) {
-		// TODO Auto-generated method stub
 		return modelMapper.map(regionRepository.findById(Id).get(), RegionDto.class);
 	}
 
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#allRegions()
 	 */
-	@Override
 	public List<RegionDto> allRegions() {
-		// TODO Auto-generated method stub
-		return Arrays.asList(modelMapper.map(regionRepository.findAll(), RegionDto.class));
+		List<Region> regions = regionRepository.findAll();
+		List<RegionDto>  regionDtos = new ArrayList<RegionDto>();
+		for(Region reg: regions){
+			RegionDto regionDto = modelMapper.map(reg, RegionDto.class);
+			regionDtos.add(regionDto);
+		}
+		System.out.println("List "+regionDtos.size());
+		return  regionDtos;
 	}
 
 }
