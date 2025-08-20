@@ -4,7 +4,6 @@
 package gn.patrimoine.immo.dto;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -56,5 +55,5 @@ public class ImmobilisationDto {
 	
 	private AdresseDto adresseDto;
 	
-	private Set<ValorisationImmoDto> valorisationImmoDtos = new HashSet<>();
+	private Set<ValorisationImmoDto> valorisationImmoDtos;
 }

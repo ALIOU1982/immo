@@ -27,7 +27,7 @@
 						<td th:text="${region.nomRegion}"></td>
 						<td> 
 							<a th:href="@{adresse/editeRegion/{id}(id=${region.id})}" class="btn btn-primary">Modifier</a>
-							<a th:href="@{adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary">Supprimer</a>
+							<a th:href="@{/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary">Supprimer</a>
 						 </td>
 					</tr>
 				</tbody>

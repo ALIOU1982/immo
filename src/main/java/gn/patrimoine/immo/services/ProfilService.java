@@ -24,7 +24,6 @@ public class ProfilService  implements IProfilService{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.ProfilService#findById(java.lang.Long)
 	 */
-	@Override
 	public ProfilDto findById(Long id) {
 		// TODO Auto-generated method stub
 		return mapToDto(profilRepository.findById(id).get()); //modelMapper.map(profilRepository.findById(id).get(), ProfilDto.class);
@@ -33,7 +32,6 @@ public class ProfilService  implements IProfilService{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.ProfilService#AllProfil()
 	 */
-	@Override
 	public List<ProfilDto> AllProfil() {
 		// TODO Auto-generated method stub
 		return  null;//profilRepository.findAll().stream().map(profil) , ProfilDto.class);

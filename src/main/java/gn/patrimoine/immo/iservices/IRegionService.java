@@ -18,5 +18,7 @@ public interface IRegionService {
 	public RegionDto findRegion(Long Id);
 	
 	public List<RegionDto> allRegions();
+	
+	public void supprimerRegion(Long id);
 
 }

@@ -1,6 +1,5 @@
 package gn.patrimoine.immo.entities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -28,5 +27,5 @@ public class TypeImmo {
 	private String nomTypeImmo;
 	
 	@OneToMany(mappedBy="typeImmo", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
-	private Set<Immobilisation> immobilisations  = new HashSet<>();
+	private Set<Immobilisation> immobilisations;
 }

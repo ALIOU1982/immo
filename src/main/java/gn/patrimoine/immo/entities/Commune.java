@@ -3,7 +3,6 @@
  */
 package gn.patrimoine.immo.entities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -41,5 +40,5 @@ public class Commune {
 	private Region region;
 	
 	@OneToMany(mappedBy="commune", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
-	private Set<Adresse> adresses = new HashSet<>();
+	private Set<Adresse> adresses;
 }

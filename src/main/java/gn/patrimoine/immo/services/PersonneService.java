@@ -34,7 +34,6 @@ public class PersonneService implements IPersonneService {
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IPersonneService#findById(java.lang.Long)
 	 */
-	@Override
 	public Personne findById(Long Id) {
 		// TODO Auto-generated method stub
 		return personneRepository.findById(Id).get();

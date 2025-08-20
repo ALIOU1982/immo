@@ -4,7 +4,6 @@
 package gn.patrimoine.immo.dto;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import gn.patrimoine.immo.entities.Adresse;
@@ -44,12 +43,12 @@ public class PersonneDto {
 	
 	private ProfilDto profil;
 	
-	private Set<ImmobilisationDto> publications = new HashSet<>();
+	private Set<ImmobilisationDto> publications;
 	
-	private Set<ImmobilisationDto> validations = new HashSet<>();
+	private Set<ImmobilisationDto> validations;
 	
-	private Set<ImmobilisationDto> suppressions = new HashSet<>();
+	private Set<ImmobilisationDto> suppressions;
 	
-	private Set<MessagesDto> messagesDtos = new HashSet<>();
+	private Set<MessagesDto> messagesDtos;
 
 }

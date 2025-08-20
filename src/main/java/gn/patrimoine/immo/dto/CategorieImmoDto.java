@@ -3,7 +3,6 @@
  */
 package gn.patrimoine.immo.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import gn.patrimoine.immo.entities.Immobilisation;
@@ -22,5 +21,5 @@ public class CategorieImmoDto {
 
 	private Long Id;
 	private String categgorieImmo;
-	private Set<Immobilisation> immobilisationCat  = new HashSet<>();
+	private Set<Immobilisation> immobilisationCat;
 }

@@ -36,11 +36,10 @@ public class PersonneController implements IPersonneController{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.icomtrollers.IPersonneController#findById(java.lang.Long)
 	 */
-	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<PersonneDto> findById(@PathVariable Long Id) {
 		// TODO Auto-generated method stub
-		return new ResponseEntity<>(modelMapper.map(personneService.findById(Id), PersonneDto.class), HttpStatus.OK);
+		return new ResponseEntity<PersonneDto>(modelMapper.map(personneService.findById(Id), PersonneDto.class), HttpStatus.OK);
 	}
 	
 	@GetMapping("/home")

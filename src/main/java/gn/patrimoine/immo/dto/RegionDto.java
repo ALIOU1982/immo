@@ -3,7 +3,6 @@
  */
 package gn.patrimoine.immo.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +27,6 @@ public class RegionDto {
 	@NotBlank(message="Le nom de la region n'est pas null")
 	private String nomRegion;
 	
-	private Set<CommuneDto> communeDtos = new HashSet<>();
+	private Set<CommuneDto> communeDtos;
 
 }

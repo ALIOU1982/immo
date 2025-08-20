@@ -3,7 +3,6 @@
  */
 package gn.patrimoine.immo.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -26,5 +25,5 @@ public class CommuneDto {
 	
 	private RegionDto regionDto;
 	
-	private Set<AdresseDto> adresseDtos = new HashSet<>();
+	private Set<AdresseDto> adresseDtos;
 }

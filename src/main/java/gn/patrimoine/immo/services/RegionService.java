@@ -4,7 +4,6 @@
 package gn.patrimoine.immo.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -56,6 +55,14 @@ public class RegionService implements IRegionService{
 		}
 		System.out.println("List "+regionDtos.size());
 		return  regionDtos;
+	}
+
+	/* (non-Javadoc)
+	 * @see gn.patrimoine.immo.iservices.IRegionService#supprimerRegion(java.lang.Long)
+	 */
+	public void supprimerRegion(Long id) {
+		// TODO Auto-generated method stub
+		regionRepository.deleteById(id);
 	}
 
 }

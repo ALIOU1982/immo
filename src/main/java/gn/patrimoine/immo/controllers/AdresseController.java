@@ -3,24 +3,22 @@
  */
 package gn.patrimoine.immo.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import gn.patrimoine.immo.dto.RegionDto;
-import gn.patrimoine.immo.forms.RegionForm;
 import gn.patrimoine.immo.icomtrollers.IAdresseController;
 import gn.patrimoine.immo.iservices.IRegionService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -48,6 +46,13 @@ public class AdresseController  implements IAdresseController{
 	public String creerRegion(Model model){
 		model.addAttribute("nRegion", new RegionDto());
 		return "adresse/creeRegion";
+	}
+	
+	@DeleteMapping("/supprimeRegion/{id}")
+	public String supprimeRegion(@PathVariable("id") String id){
+		System.out.println("Supprime Regions Test "+id);
+		regionService.supprimerRegion(Long.parseLong(id));
+		return "redirect:/adresse/listeRegions";
 	}
 	
 	@PostMapping("/createRegion")

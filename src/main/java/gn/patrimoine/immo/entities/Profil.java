@@ -1,6 +1,5 @@
 package gn.patrimoine.immo.entities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -28,5 +27,5 @@ public class Profil {
 	private String nomProfil;
 	
 	@OneToMany(mappedBy="profil", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
-	private Set<Personne> personnes = new HashSet<>();
+	private Set<Personne> personnes;
 }
