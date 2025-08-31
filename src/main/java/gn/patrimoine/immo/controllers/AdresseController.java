@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import gn.patrimoine.immo.dto.CommuneDto;
 import gn.patrimoine.immo.dto.RegionDto;
 import gn.patrimoine.immo.icomtrollers.IAdresseController;
 import gn.patrimoine.immo.iservices.IRegionService;
@@ -39,6 +39,7 @@ public class AdresseController  implements IAdresseController{
 	public String allRegions(Model model){
 		System.out.println("Toutes les regions");
 		model.addAttribute("regions", regionService.allRegions());
+		model.addAttribute("communes", regionService.allCommunes());
 		return  "adresse/regions";
 	}
 	
@@ -48,7 +49,7 @@ public class AdresseController  implements IAdresseController{
 		return "adresse/creeRegion";
 	}
 	
-	@DeleteMapping("/supprimeRegion/{id}")
+	@GetMapping("/supprimeRegion/{id}")
 	public String supprimeRegion(@PathVariable("id") String id){
 		System.out.println("Supprime Regions Test "+id);
 		regionService.supprimerRegion(Long.parseLong(id));
@@ -68,5 +69,17 @@ public class AdresseController  implements IAdresseController{
 		return "redirect:/adresse/listeRegions";
 	}
 	
+	@GetMapping("/createCommune")
+	public String saveCommune(@Valid @ModelAttribute("nCommune")  CommuneDto communeDto, BindingResult bindingResult, Model model) {
+		// TODO Auto-generated method stub
+		//System.out.println("Sauve Commune Test "+communeDto.getRegionDto().getNomRegion());
+		if (bindingResult.hasErrors()) {
+	        return "adresse/creeCommune";
+	    }
+		System.out.println("Sauve Commune ");
+		regionService.saveCommune(communeDto);
+		
+		return "redirect:/adresse/listeRegions";
+	}
 
 }

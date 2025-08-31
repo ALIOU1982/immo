@@ -5,6 +5,7 @@ package gn.patrimoine.immo.iservices;
 
 import java.util.List;
 
+import gn.patrimoine.immo.dto.CommuneDto;
 import gn.patrimoine.immo.dto.RegionDto;
 
 /**
@@ -20,5 +21,9 @@ public interface IRegionService {
 	public List<RegionDto> allRegions();
 	
 	public void supprimerRegion(Long id);
+	
+	public List<CommuneDto> allCommunes();
+	
+	public void saveCommune(CommuneDto communeDto);
 
 }

@@ -4,13 +4,13 @@
 	<head>
 		<title>Liste de toutes les régions</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Regions</title>
+		<title>Adresse</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	
 	<body>
 		<div class="container">
-			<h1>Regions</h1>
+			<h1>Création des Régions et Communes</h1>
 			<a href="/adresse/creeRegion" class="btn btn-primary">Ajouter region</a>
 			
 			<table class="table mt3">
@@ -26,9 +26,37 @@
 					<tr th:each="region, status: ${regions}">
 						<td th:text="${region.nomRegion}"></td>
 						<td> 
-							<a th:href="@{adresse/editeRegion/{id}(id=${region.id})}" class="btn btn-primary">Modifier</a>
-							<a th:href="@{/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary">Supprimer</a>
+							<a th:href="@{/adresse/editeRegion/{id}(id=${region.id})}" >Modifier</a>
+							<a th:href="@{/adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
 						 </td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		
+		<div class="container">
+			<h1>Commune</h1>
+			<a href="/adresse/createCommune" class="btn btn-primary">Ajouter commune</a>
+			
+			<table class="table mt3">
+				<thead>
+				
+				<tr>
+					<th>Nom commune</th>
+					<th>Nom Régions</th>
+					<th>Actions</th>
+				</tr>
+				
+				</thead>
+				<tbody>
+					<tr th:each="commune, status: ${communes}">
+						<td th:text="${commune.nomCommune}"></td>
+						<td th:text="${commune.regionDto.nomRegion}"></td>
+						<td> <!-- 
+							<a th:href="@{/adresse/editeRegion/{id}(id=${region.id})}" >Modifier</a>
+							<a th:href="@{/adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
+						  --></td>
 					</tr>
 				</tbody>
 			</table>
