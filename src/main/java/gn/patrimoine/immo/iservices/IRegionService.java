@@ -7,6 +7,8 @@ import java.util.List;
 
 import gn.patrimoine.immo.dto.CommuneDto;
 import gn.patrimoine.immo.dto.RegionDto;
+import gn.patrimoine.immo.form.CommuneForm;
+import gn.patrimoine.immo.form.RegionForm;
 
 /**
  * @author user
@@ -14,7 +16,7 @@ import gn.patrimoine.immo.dto.RegionDto;
  */
 public interface IRegionService {
 	
-	public void saveRegion(RegionDto regionDto);
+	public void saveRegion(RegionForm regionForm);
 	
 	public RegionDto findRegion(Long Id);
 	
@@ -24,6 +26,6 @@ public interface IRegionService {
 	
 	public List<CommuneDto> allCommunes();
 	
-	public void saveCommune(CommuneDto communeDto);
+	public void saveCommune(CommuneForm communeForm);
 
 }

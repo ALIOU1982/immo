@@ -35,10 +35,10 @@ public class Commune {
 	@Column(length=40)
 	private String nomCommune;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "region_id", nullable=false)
 	private Region region;
 	
-	@OneToMany(mappedBy="commune", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="commune", cascade=CascadeType.ALL, orphanRemoval= true)
 	private Set<Adresse> adresses;
 }

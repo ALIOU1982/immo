@@ -45,7 +45,7 @@ public class Adresse {
 	@JoinColumn(name = "commune_id", nullable=false)
 	private Commune commune;
 	
-	@OneToMany(mappedBy="adresse", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="adresse", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Personne> personnes;
 	
 	@OneToMany(mappedBy="adresseImmo", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)

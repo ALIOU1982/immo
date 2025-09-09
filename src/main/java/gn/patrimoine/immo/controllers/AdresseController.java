@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gn.patrimoine.immo.dto.CommuneDto;
-import gn.patrimoine.immo.dto.RegionDto;
+import gn.patrimoine.immo.form.CommuneForm;
+import gn.patrimoine.immo.form.RegionForm;
 import gn.patrimoine.immo.icomtrollers.IAdresseController;
 import gn.patrimoine.immo.iservices.IRegionService;
 import jakarta.validation.Valid;
@@ -45,7 +45,7 @@ public class AdresseController  implements IAdresseController{
 	
 	@GetMapping("/creeRegion")
 	public String creerRegion(Model model){
-		model.addAttribute("nRegion", new RegionDto());
+		model.addAttribute("nRegion", new RegionForm());
 		return "adresse/creeRegion";
 	}
 	
@@ -57,29 +57,38 @@ public class AdresseController  implements IAdresseController{
 	}
 	
 	@PostMapping("/createRegion")
-	public String saveRegion(@Valid @ModelAttribute("nRegion")  RegionDto regionDto, BindingResult bindingResult, Model model) {
+	public String saveRegion(@Valid @ModelAttribute("nRegion")  RegionForm regionForm, BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
-		System.out.println("Sauve Regions Test "+regionDto.getNomRegion());
+		System.out.println("Sauve Regions Test "+regionForm.getNomRegion());
 		if (bindingResult.hasErrors()) {
 	        return "adresse/creeRegion";
 	    }
-		System.out.println("Sauve Regions "+regionDto.getNomRegion());
-		regionService.saveRegion(regionDto);
+		System.out.println("Sauve Regions "+regionForm.getNomRegion());
+		regionService.saveRegion(regionForm);
 		
 		return "redirect:/adresse/listeRegions";
 	}
 	
-	@GetMapping("/createCommune")
-	public String saveCommune(@Valid @ModelAttribute("nCommune")  CommuneDto communeDto, BindingResult bindingResult, Model model) {
+	@PostMapping("/createCommune")
+	public String saveCommune(@Valid @ModelAttribute("nCommune")  CommuneForm communeForm,  BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
-		//System.out.println("Sauve Commune Test "+communeDto.getRegionDto().getNomRegion());
+		System.out.println("Sauve Commune Test "+model.getAttribute("nCommune")+" test "+communeForm.getRegionId());
+		//RegionDto regionDto = regionService.findRegion(communeForm.getRegionId());
 		if (bindingResult.hasErrors()) {
+			System.out.println("Erreur "+bindingResult.getAllErrors());
 	        return "adresse/creeCommune";
 	    }
-		System.out.println("Sauve Commune ");
-		regionService.saveCommune(communeDto);
+		System.out.println("Sauve Commune "+communeForm.toString());
+		regionService.saveCommune(communeForm);
 		
 		return "redirect:/adresse/listeRegions";
+	}
+	
+	@GetMapping("/creeCommune")
+	public String creeCommune(Model model){
+		model.addAttribute("nCommune", new CommuneForm());
+		model.addAttribute("regions", regionService.allRegions());
+		return "adresse/creeCommune";
 	}
 
 }

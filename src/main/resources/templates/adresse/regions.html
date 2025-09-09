@@ -37,7 +37,7 @@
 		
 		<div class="container">
 			<h1>Commune</h1>
-			<a href="/adresse/createCommune" class="btn btn-primary">Ajouter commune</a>
+			<a href="/adresse/creeCommune" class="btn btn-primary">Ajouter commune</a>
 			
 			<table class="table mt3">
 				<thead>
@@ -51,8 +51,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="commune, status: ${communes}">
-						<td th:text="${commune.nomCommune}"></td>
-						<td th:text="${commune.regionDto.nomRegion}"></td>
+						<td th:text="${commune.nomCommune}"></td><!-- 
+						<td th:text="${commune.regionDto.nomRegion}"></td> -->
 						<td> <!-- 
 							<a th:href="@{/adresse/editeRegion/{id}(id=${region.id})}" >Modifier</a>
 							<a th:href="@{/adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary" th:method="post">Supprimer</a>

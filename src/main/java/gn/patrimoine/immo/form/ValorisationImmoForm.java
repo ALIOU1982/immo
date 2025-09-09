@@ -1,7 +1,4 @@
-/**
- * 
- */
-package gn.patrimoine.immo.dto;
+package gn.patrimoine.immo.form;
 
 import java.util.Date;
 
@@ -9,15 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author user
- *
- */
-@Data
-@NoArgsConstructor
+
 @AllArgsConstructor
-public class ValorisationImmoDto {
+@NoArgsConstructor
+@Data
+public class ValorisationImmoForm {
 	
+
 	private Long Id;
 	
 	private Date dateCreation;
@@ -28,5 +23,6 @@ public class ValorisationImmoDto {
 	
 	private Long points;
 	
-	private ImmobilisationDto immobilisationDto;
+	private Long immobilisationId;
+
 }
