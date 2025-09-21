@@ -5,6 +5,7 @@ package gn.patrimoine.immo.entities;
 
 import java.util.Set;
 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,10 +36,10 @@ public class Commune {
 	@Column(length=40)
 	private String nomCommune;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	@JoinColumn(name = "region_id", nullable=false)
 	private Region region;
 	
-	@OneToMany(mappedBy="commune", cascade=CascadeType.ALL, orphanRemoval= true)
+	@OneToMany(mappedBy="commune", cascade=CascadeType.REMOVE, orphanRemoval= true)
 	private Set<Adresse> adresses;
 }

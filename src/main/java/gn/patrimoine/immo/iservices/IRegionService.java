@@ -24,6 +24,8 @@ public interface IRegionService {
 	
 	public void supprimerRegion(Long id);
 	
+	public void supprimerCommune(Long id);
+	
 	public List<CommuneDto> allCommunes();
 	
 	public void saveCommune(CommuneForm communeForm);

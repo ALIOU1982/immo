@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import gn.patrimoine.immo.dto.RegionDto;
 import gn.patrimoine.immo.form.CommuneForm;
 import gn.patrimoine.immo.form.RegionForm;
 import gn.patrimoine.immo.icomtrollers.IAdresseController;
@@ -39,6 +40,7 @@ public class AdresseController  implements IAdresseController{
 	public String allRegions(Model model){
 		System.out.println("Toutes les regions");
 		model.addAttribute("regions", regionService.allRegions());
+		System.out.println("Toutes les communes");
 		model.addAttribute("communes", regionService.allCommunes());
 		return  "adresse/regions";
 	}
@@ -53,6 +55,14 @@ public class AdresseController  implements IAdresseController{
 	public String supprimeRegion(@PathVariable("id") String id){
 		System.out.println("Supprime Regions Test "+id);
 		regionService.supprimerRegion(Long.parseLong(id));
+		return "redirect:/adresse/listeRegions";
+	}
+	
+	@GetMapping("/supprimeCommune/{id}")
+	public String supprimeCommune(@PathVariable("id") String id){
+		
+		System.out.println("Supprime Commune Test "+id);
+		regionService.supprimerCommune(Long.parseLong(id));
 		return "redirect:/adresse/listeRegions";
 	}
 	
@@ -89,6 +99,14 @@ public class AdresseController  implements IAdresseController{
 		model.addAttribute("nCommune", new CommuneForm());
 		model.addAttribute("regions", regionService.allRegions());
 		return "adresse/creeCommune";
+	}
+	
+	@GetMapping("/editeRegion/{id}")
+	public String editeRegion(@PathVariable("id") String id, Model model){
+		RegionDto region = regionService.findRegion(Long.parseLong(id));
+		model.addAttribute("nRegion", region);
+		model.addAttribute("nomRegion", region.getNomRegion());
+		return "adresse/editeRegion";
 	}
 
 }

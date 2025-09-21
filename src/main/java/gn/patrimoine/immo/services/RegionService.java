@@ -19,12 +19,14 @@ import gn.patrimoine.immo.form.RegionForm;
 import gn.patrimoine.immo.iservices.IRegionService;
 import gn.patrimoine.immo.repositories.CommuneRepository;
 import gn.patrimoine.immo.repositories.RegionRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * @author user
  *
  */
 @Service
+@Transactional
 public class RegionService implements IRegionService{
 	
 	@Autowired
@@ -63,7 +65,6 @@ public class RegionService implements IRegionService{
 			RegionDto regionDto = modelMapper.map(reg, RegionDto.class);
 			regionDtos.add(regionDto);
 		}
-		System.out.println("List "+regionDtos.size());
 		return  regionDtos;
 	}
 
@@ -74,25 +75,33 @@ public class RegionService implements IRegionService{
 		// TODO Auto-generated method stub
 		regionRepository.deleteById(id);
 	}
+	
+	public void supprimerCommune(Long id) {
+		// TODO Auto-generated method stub
+		System.out.println("Service "+id);
+		communeRepository.deleteById(id);
+	}
 
 	public List<CommuneDto> allCommunes() {
 		// TODO Auto-generated method stub
 		List<Commune> communes = communeRepository.findAll();
 		List<CommuneDto> communeDtos = new ArrayList<CommuneDto>();
-		//System.out.println("communes "+communes.toString());
 		for(Commune commune: communes){
-			CommuneDto communeDto = modelMapper.map(commune, CommuneDto.class);
-			System.out.println("communes "+communeDto.toString());
-			/*communeDto.setId(commune.getId());
-			communeDto.setNomCommune(commune.getNomCommune());
-			communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));*/
+			System.out.println("communes "+commune.getNomCommune());
+			CommuneDto communeDto = convertEntityToDto(commune);
+			System.out.println("communeDto "+communeDto.toString());
 			communeDtos.add(communeDto);
 		}
-				
-		System.out.println("communeDtos "+communeDtos.toString());
 		return communeDtos;
 	}
 
+	private CommuneDto convertEntityToDto(Commune commune){
+		CommuneDto communeDto = new CommuneDto();
+		communeDto.setId(commune.getId());
+		communeDto.setNomCommune(commune.getNomCommune());
+		communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));
+		return communeDto;
+	}
 	public void saveCommune(CommuneForm communeForm) {
 		// TODO Auto-generated method stub
 		CommuneDto communeDto = new CommuneDto();
@@ -104,6 +113,7 @@ public class RegionService implements IRegionService{
 		System.out.println("Test "+communeDto.toString());
 		System.out.println("Test "+communeDto.getRegionDto().toString());
 		commune.setRegion(modelMapper.map(communeDto.getRegionDto(), Region.class));
+		System.out.println("Test commune "+commune.toString());
 		communeRepository.save(commune);
 	}
 

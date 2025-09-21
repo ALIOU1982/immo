@@ -41,7 +41,7 @@ public class Adresse {
 	@Column(length=100, nullable=true)
 	private String CoordGeo;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "commune_id", nullable=false)
 	private Commune commune;
 	

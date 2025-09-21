@@ -3,6 +3,7 @@
  */
 package gn.patrimoine.immo.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -34,7 +35,7 @@ public class Region {
 	@Column(length=40)
 	private String nomRegion;
 	
-	@OneToMany(mappedBy="region", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
-	private Set<Commune> communes;
+	@OneToMany(mappedBy="region", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
+	private Set<Commune> communes = new HashSet<Commune>();
 
 }

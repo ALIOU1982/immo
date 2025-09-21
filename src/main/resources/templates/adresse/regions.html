@@ -51,12 +51,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="commune, status: ${communes}">
-						<td th:text="${commune.nomCommune}"></td><!-- 
-						<td th:text="${commune.regionDto.nomRegion}"></td> -->
-						<td> <!-- 
-							<a th:href="@{/adresse/editeRegion/{id}(id=${region.id})}" >Modifier</a>
-							<a th:href="@{/adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
-						  --></td>
+						<td th:text="${commune.nomCommune}"></td> 
+						<td th:text="${commune.regionDto.nomRegion}"></td>
+						<td>
+							<a th:href="@{/adresse/editeCommune/{id}(id=${commune.id})}" >Modifier</a>
+							<a th:href="@{/adresse/supprimeCommune/{id}(id=${commune.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
