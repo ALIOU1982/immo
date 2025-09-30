@@ -5,6 +5,7 @@ package gn.patrimoine.immo.iservices;
 
 import java.util.List;
 
+
 import gn.patrimoine.immo.dto.CommuneDto;
 import gn.patrimoine.immo.dto.RegionDto;
 import gn.patrimoine.immo.form.CommuneForm;
@@ -20,6 +21,8 @@ public interface IRegionService {
 	
 	public RegionDto findRegion(Long Id);
 	
+	public CommuneDto findCommune(Long Id);
+	
 	public List<RegionDto> allRegions();
 	
 	public void supprimerRegion(Long id);
@@ -29,5 +32,11 @@ public interface IRegionService {
 	public List<CommuneDto> allCommunes();
 	
 	public void saveCommune(CommuneForm communeForm);
+	
+	public void updateRegion(Long id, String nomRegion);
+	
+	public void updateCommune(Long id, String nomRegion, Long regionId);
+	
+	public void updateCommune(CommuneDto communeDto);
 
 }

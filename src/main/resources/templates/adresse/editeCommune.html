@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<title>Editer une commune</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Modifier le nom</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<div class="container">
+			<h1>Modifier</h1>
+			<form th:action="@{/adresse/editionCommune/{id}(id = ${idCommune})}" th:object="${nEditCommune}" th:method="put">
+			
+				<div class="form-group">
+					<label for="nomCommune">nom Commune</label>
+ 					<input type="text" id="nomCommune" th:field="*{nomCommune}" class="form-control">
+ 					<label for="regionForm">Choix Region</label>
+				</div> 
+				<div class="form-group">
+					<select class="form-control" id="regionId" th:field="*{regionId}">
+    					<option th:value="${regionId}" th:text="${nomRegion}"></option>
+    					<option th:each="option : ${regions}" th:value="${option.id}" th:text="${option.nomRegion}"></option>
+					</select>
+				</div>
+				 
+				<button type="submit" class="btn btn-primary">Enregistrer</button>
+				<a href="/adresse/listeRegions" class="btn btn-primary">Annuler</a>
+				
+			</form>			
+			
+		</div>
+
+</body>
+</html>

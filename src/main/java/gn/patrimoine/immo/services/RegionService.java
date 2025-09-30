@@ -102,6 +102,15 @@ public class RegionService implements IRegionService{
 		communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));
 		return communeDto;
 	}
+	
+	private Commune convertDtoToEntity(CommuneDto communeDto){
+		Commune commune = new Commune();
+		commune.setId(communeDto.getId());
+		commune.setNomCommune(communeDto.getNomCommune());
+		commune.setRegion(modelMapper.map(communeDto.getRegionDto(), Region.class));
+		return commune;
+	}
+	
 	public void saveCommune(CommuneForm communeForm) {
 		// TODO Auto-generated method stub
 		CommuneDto communeDto = new CommuneDto();
@@ -115,6 +124,33 @@ public class RegionService implements IRegionService{
 		commune.setRegion(modelMapper.map(communeDto.getRegionDto(), Region.class));
 		System.out.println("Test commune "+commune.toString());
 		communeRepository.save(commune);
+	}
+
+	public void updateRegion(Long id, String nomRegion) {
+		// TODO Auto-generated method stub
+		regionRepository.updateRegion(id, nomRegion);		
+	}
+	
+	public void updateCommune(Long id, String nomCommune, Long regionId) {
+		// TODO Auto-generated method stub
+		System.out.println("region "+regionId+" id "+id+" nom "+nomCommune);
+		Region region = regionRepository.findById(regionId).get();
+		System.out.println("region "+region.toString()+" id "+id+" nom "+nomCommune);
+		communeRepository.updateCommune(id, nomCommune, region);		
+	}
+
+	public CommuneDto findCommune(Long Id) {
+		// TODO Auto-generated method stub
+		Commune commune = communeRepository.findById(Id).get();
+		CommuneDto communeDto = new CommuneDto();
+		communeDto.setId(commune.getId());
+		communeDto.setNomCommune(commune.getNomCommune());
+		communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));
+		return communeDto;
+	}
+	
+	public void updateCommune(CommuneDto communeDto){
+		communeRepository.save(convertDtoToEntity(communeDto));		
 	}
 
 }

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import gn.patrimoine.immo.dto.CommuneDto;
 import gn.patrimoine.immo.dto.RegionDto;
 import gn.patrimoine.immo.form.CommuneForm;
 import gn.patrimoine.immo.form.RegionForm;
@@ -79,6 +81,33 @@ public class AdresseController  implements IAdresseController{
 		return "redirect:/adresse/listeRegions";
 	}
 	
+	@PutMapping("/editionRegion/{id}")
+	public String editionRegion(@Valid @ModelAttribute("nEditRegion")  RegionForm regionForm, @PathVariable("id") String id) {
+		// TODO Auto-generated method stub
+		System.out.println("Sauve Regions Test "+regionForm.getNomRegion());
+		RegionDto regionDto = regionService.findRegion(Long.parseLong(id));
+		regionForm.setId(regionDto.getId());
+		System.out.println("Sauve Regions "+regionForm.getNomRegion());
+		regionService.updateRegion(Long.parseLong(id), regionForm.getNomRegion());
+		
+		return "redirect:/adresse/listeRegions";
+	}
+	
+	@PutMapping("/editionCommune/{id}")
+	public String editionCommune(@Valid @ModelAttribute("nEditCommune")  CommuneForm communeForm, @PathVariable("id") String id) {
+		// TODO Auto-generated method stub
+		System.out.println("Sauve Commune Test "+communeForm.getNomCommune());
+		//CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
+		//regionForm.setId(regionDto.getId());
+		System.out.println("Sauve Regions Controlleur "+communeForm.getNomCommune()+" Id Region "+communeForm.getRegionId()+ " Id "+id);
+		CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
+		communeDto.setNomCommune(communeForm.getNomCommune());
+		communeDto.setRegionDto(regionService.findRegion(communeForm.getRegionId()));
+		regionService.updateCommune(communeDto);
+		
+		return "redirect:/adresse/listeRegions";
+	}
+	
 	@PostMapping("/createCommune")
 	public String saveCommune(@Valid @ModelAttribute("nCommune")  CommuneForm communeForm,  BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
@@ -104,9 +133,26 @@ public class AdresseController  implements IAdresseController{
 	@GetMapping("/editeRegion/{id}")
 	public String editeRegion(@PathVariable("id") String id, Model model){
 		RegionDto region = regionService.findRegion(Long.parseLong(id));
-		model.addAttribute("nRegion", region);
+		model.addAttribute("nEditRegion", region);
+		model.addAttribute("idRegion", id);
 		model.addAttribute("nomRegion", region.getNomRegion());
+		System.out.println("Nom Regiin >>>>> "+region.toString()+ " Id "+id);
 		return "adresse/editeRegion";
+	}
+	
+	@GetMapping("/editeCommune/{id}")
+	public String editeCommune(@PathVariable("id") String id, Model model){
+		CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
+		CommuneForm com = new CommuneForm();
+		com.setNomCommune(communeDto.getNomCommune());
+		com.setRegionId(communeDto.getRegionDto().getId());
+		model.addAttribute("nEditCommune", com);
+		model.addAttribute("idCommune", id);
+		model.addAttribute("nomCommune", communeDto.getNomCommune());
+		model.addAttribute("nomRegion", communeDto.getRegionDto().getNomRegion());
+		model.addAttribute("regionId", communeDto.getRegionDto().getId());
+		model.addAttribute("regions", regionService.allRegions());
+		return "adresse/editeCommune";
 	}
 
 }
