@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<title>Editer un Profil</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Modifier le nom</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<div class="container">
+			<h1>Modifier</h1>
+			<form th:action="@{/users/editionProfil/{id}(id = ${idProfil})}" th:object="${nEditProfil}" th:method="put">
+			
+				<div class="form-group">
+					<label for="nomProfil">nom Profil</label>
+ 					<input type="text" id="nomProfil" th:field="*{nomProfil}" class="form-control">
+				</div> 
+				 
+				<button type="submit" class="btn btn-primary">Enregistrer</button>
+				<a href="/users/listeProfils" class="btn btn-primary">Annuler</a>
+				
+			</form>			
+			
+		</div>
+
+</body>
+</html>

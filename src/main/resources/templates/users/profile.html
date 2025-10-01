@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Liste de tous les profils</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Profil</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="container">
+			<h1>Création des Profils</h1>
+			<a href="/users/creeProfil" class="btn btn-primary">Ajouter profil</a>
+			
+			<table class="table mt3">
+				<thead>
+				
+				<tr>
+					<th>Nom Profil</th>
+					<th>Actions</th>
+				</tr>
+				
+				</thead>
+				<tbody>
+					<tr th:each="profil, status: ${profils}">
+						<td th:text="${profil.nomProfil}"></td>
+						<td> 
+							<a th:href="@{/users/editeProfil/{id}(id=${profil.id})}" >Modifier</a>
+							<a th:href="@{/users/supprimeProfil/{id}(id=${profil.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+	
+</html>
