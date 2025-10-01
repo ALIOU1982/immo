@@ -1,7 +1,7 @@
 package gn.patrimoine.immo.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -64,15 +64,15 @@ public class Personne {
 	private Profil profil;
 	
 	@OneToMany(mappedBy="publiePar", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	private Set<Immobilisation> publications;
+	private List<Immobilisation> publications;
 	
 	@OneToMany(mappedBy="validerPar", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	private Set<Immobilisation> validations;
+	private List<Immobilisation> validations;
 	
 	@OneToMany(mappedBy="supprimerPar", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	private Set<Immobilisation> suppressions;
+	private List<Immobilisation> suppressions;
 	
 	@OneToMany(mappedBy="envoieA", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	private Set<Messages> messages;
+	private List<Messages> messages;
 
 }

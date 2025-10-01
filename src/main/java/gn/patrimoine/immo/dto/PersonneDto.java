@@ -4,7 +4,7 @@
 package gn.patrimoine.immo.dto;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import gn.patrimoine.immo.entities.Adresse;
 import lombok.AllArgsConstructor;
@@ -43,12 +43,12 @@ public class PersonneDto {
 	
 	private ProfilDto profil;
 	
-	private Set<ImmobilisationDto> publications;
+	private List<ImmobilisationDto> publications;
 	
-	private Set<ImmobilisationDto> validations;
+	private List<ImmobilisationDto> validations;
 	
-	private Set<ImmobilisationDto> suppressions;
+	private List<ImmobilisationDto> suppressions;
 	
-	private Set<MessagesDto> messagesDtos;
+	private List<MessagesDto> messagesDtos;
 
 }

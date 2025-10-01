@@ -3,7 +3,7 @@
  */
 package gn.patrimoine.immo.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,8 +46,8 @@ public class Adresse {
 	private Commune commune;
 	
 	@OneToMany(mappedBy="adresse", cascade=CascadeType.ALL, orphanRemoval=true)
-	private Set<Personne> personnes;
+	private List<Personne> personnes;
 	
 	@OneToMany(mappedBy="adresseImmo", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	private Set<Immobilisation> immobilisations;
+	private List<Immobilisation> immobilisations;
 }

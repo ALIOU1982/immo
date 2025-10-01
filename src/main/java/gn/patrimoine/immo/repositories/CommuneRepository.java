@@ -1,6 +1,8 @@
 package gn.patrimoine.immo.repositories;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +16,6 @@ public interface CommuneRepository extends JpaRepository<Commune, Long> {
 	@Modifying
 	@Query("update Commune c set c.region = :region where c.id = :id")
 	void updateCommune(@Param(value = "id") Long id, @Param(value = "nomCommune") String nomCommune, @Param(value = "region") Region region);
+	
+	List<Commune> findByRegion(Region region);
 }

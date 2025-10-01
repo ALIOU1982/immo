@@ -1,6 +1,6 @@
 package gn.patrimoine.immo.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,5 +27,5 @@ public class CategorieImmo {
 	private String categgorieImmo;
 	
 	@OneToMany(mappedBy="categorieImmo", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
-	private Set<Immobilisation> immobilisationCat;
+	private List<Immobilisation> immobilisationCat;
 }

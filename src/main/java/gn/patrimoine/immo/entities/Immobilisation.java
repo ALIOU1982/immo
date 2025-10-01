@@ -1,7 +1,7 @@
 package gn.patrimoine.immo.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -86,5 +86,5 @@ public class Immobilisation {
 	private Personne supprimerPar;
 	
 	@OneToMany(mappedBy="immobilisation", cascade=CascadeType.ALL, orphanRemoval= true, fetch=FetchType.LAZY)
-	private Set<ValorisationImmo> valorisationImmos;
+	private List<ValorisationImmo> valorisationImmos;
 }

@@ -3,7 +3,7 @@
  */
 package gn.patrimoine.immo.dto;
 
-import java.util.Set;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +20,6 @@ public class TypeImmoDto {
 	
 	private Long Id;
 	private String nomTypeImmo;
-	private Set<ImmobilisationDto> immobilisations;
+	private List<ImmobilisationDto> immobilisations;
 
 }

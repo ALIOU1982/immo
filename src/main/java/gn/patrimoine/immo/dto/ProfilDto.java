@@ -3,7 +3,7 @@
  */
 package gn.patrimoine.immo.dto;
 
-import java.util.Set;
+import java.util.List;
 
 import gn.patrimoine.immo.entities.Personne;
 import lombok.AllArgsConstructor;
@@ -21,5 +21,5 @@ public class ProfilDto {
 	
 	private Long Id;
 	private String nomProfil;
-	private Set<Personne> personnes;
+	private List<Personne> personnes;
 }

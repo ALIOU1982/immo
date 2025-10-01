@@ -3,7 +3,7 @@
  */
 package gn.patrimoine.immo.entities;
 
-import java.util.Set;
+import java.util.List;
 
 
 import jakarta.persistence.CascadeType;
@@ -41,5 +41,5 @@ public class Commune {
 	private Region region;
 	
 	@OneToMany(mappedBy="commune", cascade=CascadeType.REMOVE, orphanRemoval= true)
-	private Set<Adresse> adresses;
+	private List<Adresse> adresses;
 }

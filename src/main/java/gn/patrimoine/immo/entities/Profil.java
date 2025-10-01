@@ -1,6 +1,6 @@
 package gn.patrimoine.immo.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,5 +27,5 @@ public class Profil {
 	private String nomProfil;
 	
 	@OneToMany(mappedBy="profil", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
-	private Set<Personne> personnes;
+	private List<Personne> personnes;
 }

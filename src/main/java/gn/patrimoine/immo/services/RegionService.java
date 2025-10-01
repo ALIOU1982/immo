@@ -73,6 +73,11 @@ public class RegionService implements IRegionService{
 	 */
 	public void supprimerRegion(Long id) {
 		// TODO Auto-generated method stub
+		List<Commune> communes = communeRepository.findByRegion(regionRepository.findById(id).get());
+		for(Commune commune: communes){
+			System.out.println("Fils "+commune.getId());
+			//supprimerCommune(commune.getId()); 
+		}
 		regionRepository.deleteById(id);
 	}
 	
