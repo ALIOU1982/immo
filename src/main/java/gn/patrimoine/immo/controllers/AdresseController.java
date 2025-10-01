@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gn.patrimoine.immo.dto.CommuneDto;
-import gn.patrimoine.immo.dto.RegionDto;
+import gn.patrimoine.immo.dto.DepartementDto;
 import gn.patrimoine.immo.form.CommuneForm;
-import gn.patrimoine.immo.form.RegionForm;
+import gn.patrimoine.immo.form.DepartementForm;
 import gn.patrimoine.immo.icomtrollers.IAdresseController;
-import gn.patrimoine.immo.iservices.IRegionService;
+import gn.patrimoine.immo.iservices.IDepartementService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -35,124 +35,111 @@ public class AdresseController  implements IAdresseController{
 	
 	
 	@Autowired
-	private final IRegionService regionService;
+	private final IDepartementService departementService;
 	
 	
-	@GetMapping("/listeRegions")
-	public String allRegions(Model model){
-		System.out.println("Toutes les regions");
-		model.addAttribute("regions", regionService.allRegions());
+	@GetMapping("/listeDepartements")
+	public String allDepartements(Model model){
+		model.addAttribute("departements", departementService.allDepartements());
 		System.out.println("Toutes les communes");
-		model.addAttribute("communes", regionService.allCommunes());
-		return  "adresse/regions";
+		model.addAttribute("communes", departementService.allCommunes());
+		return  "adresse/departements";
 	}
 	
-	@GetMapping("/creeRegion")
-	public String creerRegion(Model model){
-		model.addAttribute("nRegion", new RegionForm());
-		return "adresse/creeRegion";
+	@GetMapping("/creeDepartement")
+	public String creerDepartement(Model model){
+		model.addAttribute("nDepartement", new DepartementForm());
+		return "adresse/creeDepartement";
 	}
 	
-	@GetMapping("/supprimeRegion/{id}")
-	public String supprimeRegion(@PathVariable("id") String id){
-		System.out.println("Supprime Regions Test "+id);
-		regionService.supprimerRegion(Long.parseLong(id));
-		return "redirect:/adresse/listeRegions";
+	@GetMapping("/supprimeDepartement/{id}")
+	public String supprimeDepartement(@PathVariable("id") String id){
+		departementService.supprimerDepartement(Long.parseLong(id));
+		return "redirect:/adresse/listeDepartements";
 	}
 	
 	@GetMapping("/supprimeCommune/{id}")
 	public String supprimeCommune(@PathVariable("id") String id){
 		
 		System.out.println("Supprime Commune Test "+id);
-		regionService.supprimerCommune(Long.parseLong(id));
-		return "redirect:/adresse/listeRegions";
+		departementService.supprimerCommune(Long.parseLong(id));
+		return "redirect:/adresse/listeDepartements";
 	}
 	
-	@PostMapping("/createRegion")
-	public String saveRegion(@Valid @ModelAttribute("nRegion")  RegionForm regionForm, BindingResult bindingResult, Model model) {
+	@PostMapping("/createDepartement")
+	public String saveDepartement(@Valid @ModelAttribute("nDepartement")  DepartementForm departementForm, BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
-		System.out.println("Sauve Regions Test "+regionForm.getNomRegion());
 		if (bindingResult.hasErrors()) {
-	        return "adresse/creeRegion";
+	        return "adresse/creeDepartement";
 	    }
-		System.out.println("Sauve Regions "+regionForm.getNomRegion());
-		regionService.saveRegion(regionForm);
+		departementService.saveDepartement(departementForm);
 		
-		return "redirect:/adresse/listeRegions";
+		return "redirect:/adresse/listeDepartements";
 	}
 	
-	@PutMapping("/editionRegion/{id}")
-	public String editionRegion(@Valid @ModelAttribute("nEditRegion")  RegionForm regionForm, @PathVariable("id") String id) {
+	@PutMapping("/editionDepartement/{id}")
+	public String editionDepartement(@Valid @ModelAttribute("nEditDepartement")  DepartementForm departementForm, @PathVariable("id") String id) {
 		// TODO Auto-generated method stub
-		System.out.println("Sauve Regions Test "+regionForm.getNomRegion());
-		RegionDto regionDto = regionService.findRegion(Long.parseLong(id));
-		regionForm.setId(regionDto.getId());
-		System.out.println("Sauve Regions "+regionForm.getNomRegion());
-		regionService.updateRegion(Long.parseLong(id), regionForm.getNomRegion());
+		DepartementDto departementDto = departementService.findDepartement(Long.parseLong(id));
+		departementForm.setId(departementDto.getId());
+		departementService.updateDepartement(Long.parseLong(id), departementForm.getNomDepartement());
 		
-		return "redirect:/adresse/listeRegions";
+		return "redirect:/adresse/listeDepartements";
 	}
 	
 	@PutMapping("/editionCommune/{id}")
 	public String editionCommune(@Valid @ModelAttribute("nEditCommune")  CommuneForm communeForm, @PathVariable("id") String id) {
 		// TODO Auto-generated method stub
 		System.out.println("Sauve Commune Test "+communeForm.getNomCommune());
-		//CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
-		//regionForm.setId(regionDto.getId());
-		System.out.println("Sauve Regions Controlleur "+communeForm.getNomCommune()+" Id Region "+communeForm.getRegionId()+ " Id "+id);
-		CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
+		CommuneDto communeDto = departementService.findCommune(Long.parseLong(id));
 		communeDto.setNomCommune(communeForm.getNomCommune());
-		communeDto.setRegionDto(regionService.findRegion(communeForm.getRegionId()));
-		regionService.updateCommune(communeDto);
+		communeDto.setDepartementDto(departementService.findDepartement(communeForm.getDepartementId()));
+		departementService.updateCommune(communeDto);
 		
-		return "redirect:/adresse/listeRegions";
+		return "redirect:/adresse/listeDepartements";
 	}
 	
 	@PostMapping("/createCommune")
 	public String saveCommune(@Valid @ModelAttribute("nCommune")  CommuneForm communeForm,  BindingResult bindingResult, Model model) {
 		// TODO Auto-generated method stub
-		System.out.println("Sauve Commune Test "+model.getAttribute("nCommune")+" test "+communeForm.getRegionId());
-		//RegionDto regionDto = regionService.findRegion(communeForm.getRegionId());
 		if (bindingResult.hasErrors()) {
 			System.out.println("Erreur "+bindingResult.getAllErrors());
 	        return "adresse/creeCommune";
 	    }
 		System.out.println("Sauve Commune "+communeForm.toString());
-		regionService.saveCommune(communeForm);
+		departementService.saveCommune(communeForm);
 		
-		return "redirect:/adresse/listeRegions";
+		return "redirect:/adresse/listeDepartements";
 	}
 	
 	@GetMapping("/creeCommune")
 	public String creeCommune(Model model){
 		model.addAttribute("nCommune", new CommuneForm());
-		model.addAttribute("regions", regionService.allRegions());
+		model.addAttribute("departements", departementService.allDepartements());
 		return "adresse/creeCommune";
 	}
 	
-	@GetMapping("/editeRegion/{id}")
-	public String editeRegion(@PathVariable("id") String id, Model model){
-		RegionDto region = regionService.findRegion(Long.parseLong(id));
-		model.addAttribute("nEditRegion", region);
-		model.addAttribute("idRegion", id);
-		model.addAttribute("nomRegion", region.getNomRegion());
-		System.out.println("Nom Regiin >>>>> "+region.toString()+ " Id "+id);
-		return "adresse/editeRegion";
+	@GetMapping("/editeDepartement/{id}")
+	public String editeDepartement(@PathVariable("id") String id, Model model){
+		DepartementDto departementDto = departementService.findDepartement(Long.parseLong(id));
+		model.addAttribute("nEditDepartement", departementDto);
+		model.addAttribute("idDepartement", id);
+		model.addAttribute("nomDepartement", departementDto.getNomDepartement());
+		return "adresse/editeDepartement";
 	}
 	
 	@GetMapping("/editeCommune/{id}")
 	public String editeCommune(@PathVariable("id") String id, Model model){
-		CommuneDto communeDto = regionService.findCommune(Long.parseLong(id));
+		CommuneDto communeDto = departementService.findCommune(Long.parseLong(id));
 		CommuneForm com = new CommuneForm();
 		com.setNomCommune(communeDto.getNomCommune());
-		com.setRegionId(communeDto.getRegionDto().getId());
+		com.setDepartementId(communeDto.getDepartementDto().getId());
 		model.addAttribute("nEditCommune", com);
 		model.addAttribute("idCommune", id);
 		model.addAttribute("nomCommune", communeDto.getNomCommune());
-		model.addAttribute("nomRegion", communeDto.getRegionDto().getNomRegion());
-		model.addAttribute("regionId", communeDto.getRegionDto().getId());
-		model.addAttribute("regions", regionService.allRegions());
+		model.addAttribute("nomDepartement", communeDto.getDepartementDto().getNomDepartement());
+		model.addAttribute("departementId", communeDto.getDepartementDto().getId());
+		model.addAttribute("departements", departementService.allDepartements());
 		return "adresse/editeCommune";
 	}
-
 }

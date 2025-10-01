@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RegionDto {
+public class DepartementDto {
 	
 	private Long id;
 	
-	private String nomRegion;
+	private String nomDepartement;
 	
 	private List<CommuneDto> communeDtos;
 

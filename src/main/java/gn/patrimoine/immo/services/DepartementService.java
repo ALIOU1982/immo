@@ -11,14 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gn.patrimoine.immo.dto.CommuneDto;
-import gn.patrimoine.immo.dto.RegionDto;
+import gn.patrimoine.immo.dto.DepartementDto;
 import gn.patrimoine.immo.entities.Commune;
-import gn.patrimoine.immo.entities.Region;
+import gn.patrimoine.immo.entities.Departement;
 import gn.patrimoine.immo.form.CommuneForm;
-import gn.patrimoine.immo.form.RegionForm;
-import gn.patrimoine.immo.iservices.IRegionService;
+import gn.patrimoine.immo.form.DepartementForm;
+import gn.patrimoine.immo.iservices.IDepartementService;
 import gn.patrimoine.immo.repositories.CommuneRepository;
-import gn.patrimoine.immo.repositories.RegionRepository;
+import gn.patrimoine.immo.repositories.DepartementRepository;
 import jakarta.transaction.Transactional;
 
 /**
@@ -27,10 +27,10 @@ import jakarta.transaction.Transactional;
  */
 @Service
 @Transactional
-public class RegionService implements IRegionService{
+public class DepartementService implements IDepartementService{
 	
 	@Autowired
-	private RegionRepository regionRepository;
+	private DepartementRepository departementRepository;
 	
 	@Autowired
 	private CommuneRepository communeRepository;
@@ -41,49 +41,42 @@ public class RegionService implements IRegionService{
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#saveRegion(gn.patrimoine.immo.entities.Region)
 	 */
-	public void saveRegion(RegionForm regionForm) {
+	public void saveDepartement(DepartementForm departementForm) {
 		// TODO Auto-generated method stub
-		RegionDto regionDto = new RegionDto();
-		regionDto.setNomRegion(regionForm.getNomRegion());
-		regionRepository.save(modelMapper.map(regionDto, Region.class));
+		DepartementDto departementDto = new DepartementDto();
+		departementDto.setNomDepartement(departementForm.getNomDepartement());
+		departementRepository.save(modelMapper.map(departementDto, Departement.class));
 	}
 
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#findRegion(java.lang.Long)
 	 */
-	public RegionDto findRegion(Long Id) {
-		return modelMapper.map(regionRepository.findById(Id).get(), RegionDto.class);
+	public DepartementDto findDepartement(Long Id) {
+		return modelMapper.map(departementRepository.findById(Id).get(), DepartementDto.class);
 	}
 
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#allRegions()
 	 */
-	public List<RegionDto> allRegions() {
-		List<Region> regions = regionRepository.findAll();
-		List<RegionDto>  regionDtos = new ArrayList<RegionDto>();
-		for(Region reg: regions){
-			RegionDto regionDto = modelMapper.map(reg, RegionDto.class);
-			regionDtos.add(regionDto);
+	public List<DepartementDto> allDepartements() {
+		List<Departement> departements = departementRepository.findAll();
+		List<DepartementDto>  departementDtos = new ArrayList<DepartementDto>();
+		for(Departement dep : departements){
+			DepartementDto departementDto = modelMapper.map(dep, DepartementDto.class);
+			departementDtos.add(departementDto);
 		}
-		return  regionDtos;
+		return  departementDtos;
 	}
 
 	/* (non-Javadoc)
 	 * @see gn.patrimoine.immo.iservices.IRegionService#supprimerRegion(java.lang.Long)
 	 */
-	public void supprimerRegion(Long id) {
-		// TODO Auto-generated method stub
-		List<Commune> communes = communeRepository.findByRegion(regionRepository.findById(id).get());
-		for(Commune commune: communes){
-			System.out.println("Fils "+commune.getId());
-			//supprimerCommune(commune.getId()); 
-		}
-		regionRepository.deleteById(id);
+	public void supprimerDepartement(Long id) {
+		departementRepository.deleteById(id);
 	}
 	
 	public void supprimerCommune(Long id) {
 		// TODO Auto-generated method stub
-		System.out.println("Service "+id);
 		communeRepository.deleteById(id);
 	}
 
@@ -104,7 +97,7 @@ public class RegionService implements IRegionService{
 		CommuneDto communeDto = new CommuneDto();
 		communeDto.setId(commune.getId());
 		communeDto.setNomCommune(commune.getNomCommune());
-		communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));
+		communeDto.setDepartementDto(modelMapper.map(commune.getDepartement(), DepartementDto.class));
 		return communeDto;
 	}
 	
@@ -112,7 +105,7 @@ public class RegionService implements IRegionService{
 		Commune commune = new Commune();
 		commune.setId(communeDto.getId());
 		commune.setNomCommune(communeDto.getNomCommune());
-		commune.setRegion(modelMapper.map(communeDto.getRegionDto(), Region.class));
+		commune.setDepartement(modelMapper.map(communeDto.getDepartementDto(), Departement.class));
 		return commune;
 	}
 	
@@ -120,28 +113,26 @@ public class RegionService implements IRegionService{
 		// TODO Auto-generated method stub
 		CommuneDto communeDto = new CommuneDto();
 		communeDto.setNomCommune(communeForm.getNomCommune());
-		communeDto.setRegionDto(findRegion(communeForm.getRegionId()));
+		communeDto.setDepartementDto(findDepartement(communeForm.getDepartementId()));
 		Commune commune = new Commune();
 		commune.setNomCommune(communeDto.getNomCommune());
 
 		System.out.println("Test "+communeDto.toString());
-		System.out.println("Test "+communeDto.getRegionDto().toString());
-		commune.setRegion(modelMapper.map(communeDto.getRegionDto(), Region.class));
+		commune.setDepartement(modelMapper.map(communeDto.getDepartementDto(), Departement.class));
 		System.out.println("Test commune "+commune.toString());
 		communeRepository.save(commune);
 	}
 
-	public void updateRegion(Long id, String nomRegion) {
+	public void updateDepartement(Long id, String nomDepartement) {
 		// TODO Auto-generated method stub
-		regionRepository.updateRegion(id, nomRegion);		
+		departementRepository.updateDepartement(id, nomDepartement);		
 	}
 	
-	public void updateCommune(Long id, String nomCommune, Long regionId) {
+	public void updateCommune(Long id, String nomCommune, Long departementId) {
 		// TODO Auto-generated method stub
-		System.out.println("region "+regionId+" id "+id+" nom "+nomCommune);
-		Region region = regionRepository.findById(regionId).get();
-		System.out.println("region "+region.toString()+" id "+id+" nom "+nomCommune);
-		communeRepository.updateCommune(id, nomCommune, region);		
+		Departement departement = departementRepository.findById(departementId).get();
+		System.out.println("region "+departement.toString()+" id "+id+" nom "+nomCommune);
+		communeRepository.updateCommune(id, nomCommune, departement);		
 	}
 
 	public CommuneDto findCommune(Long Id) {
@@ -150,12 +141,11 @@ public class RegionService implements IRegionService{
 		CommuneDto communeDto = new CommuneDto();
 		communeDto.setId(commune.getId());
 		communeDto.setNomCommune(commune.getNomCommune());
-		communeDto.setRegionDto(modelMapper.map(commune.getRegion(), RegionDto.class));
+		communeDto.setDepartementDto(modelMapper.map(commune.getDepartement(), DepartementDto.class));
 		return communeDto;
 	}
 	
 	public void updateCommune(CommuneDto communeDto){
 		communeRepository.save(convertDtoToEntity(communeDto));		
 	}
-
 }

@@ -13,15 +13,15 @@
 
 	<div class="container">
 			<h1>Modifier</h1>
-			<form th:action="@{/adresse/editionRegion/{id}(id = ${idRegion})}" th:object="${nEditRegion}" th:method="put">
+			<form th:action="@{/adresse/editionDepartement/{id}(id = ${idDepartement})}" th:object="${nEditDepartement}" th:method="put">
 			
 				<div class="form-group">
-					<label for="nomRegion">nom Region</label>
- 					<input type="text" id="nomRegion" th:field="*{nomRegion}" class="form-control">
+					<label for="nomDepartement">nom Préfecture</label>
+ 					<input type="text" id="nomDepartement" th:field="*{nomDepartement}" class="form-control">
 				</div> 
 				 
 				<button type="submit" class="btn btn-primary">Enregistrer</button>
-				<a href="/adresse/listeRegions" class="btn btn-primary">Annuler</a>
+				<a href="/adresse/listeDepartement" class="btn btn-primary">Annuler</a>
 				
 			</form>			
 			

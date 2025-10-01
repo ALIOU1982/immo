@@ -23,7 +23,7 @@ public class CommuneDto {
 	
 	private String nomCommune;
 	
-	private RegionDto regionDto;
+	private DepartementDto departementDto;
 	
 	private List<AdresseDto> adresseDtos;
 }

@@ -13,5 +13,5 @@ public class CommuneForm {
 	
 	private String nomCommune;
 	
-	private Long regionId;
+	private Long departementId;
 }

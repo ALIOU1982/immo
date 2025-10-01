@@ -21,14 +21,14 @@
  					<label for="regionForm">Choix Region</label>
 				</div> 
 				<div class="form-group">
-					<select class="form-control" id="regionId" th:field="*{regionId}">
-    					<option th:value="${regionId}" th:text="${nomRegion}"></option>
-    					<option th:each="option : ${regions}" th:value="${option.id}" th:text="${option.nomRegion}"></option>
+					<select class="form-control" id="departementId" th:field="*{departementId}">
+    					<option th:value="${departementId}" th:text="${nomDepartement}"></option>
+    					<option th:each="option : ${departements}" th:value="${option.id}" th:text="${option.nomDepartement}"></option>
 					</select>
 				</div>
 				 
 				<button type="submit" class="btn btn-primary">Enregistrer</button>
-				<a href="/adresse/listeRegions" class="btn btn-primary">Annuler</a>
+				<a href="/adresse/listeDepartements" class="btn btn-primary">Annuler</a>
 				
 			</form>			
 			

@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RegionForm {
+public class DepartementForm {
 	
 	private Long id;
 	
 	@NotNull(message="Le nom de la région est obligatoire")
 	@NotBlank(message="Le nom de la region n'est pas null")
-	private String nomRegion;
+	private String nomDepartement;
 
 }

@@ -11,16 +11,16 @@
 	<body> 
 		<div class="container">
 			<h1>Ajouter</h1>
-			<form th:action="@{/adresse/createRegion}" th:object="${nRegion}" method="post">
+			<form th:action="@{/adresse/createDepartement}" th:object="${nDepartement}" method="post">
 			
 				<div class="form-group">
-					<label for="nomRegion">nomRegion</label>
-					<input type="text" id="nomRegion" th:field="*{nomRegion}" class="form-control">
-					<div th:if="${#fields.hasErrors('nomRegion')}" th:errors="*{nomRegion}" class="text-danger"></div>
+					<label for="nomDepartement">nom Préfecture</label>
+					<input type="text" id="nomDepartement" th:field="*{nomDepartement}" class="form-control">
+					<div th:if="${#fields.hasErrors('nomDepartement')}" th:errors="*{nomDepartement}" class="text-danger"></div>
 				</div> 
 				 
 				<button type="submit" class="btn btn-primary">Enregistrer</button>
-				 <a href="/adresse/listeRegions" class="btn btn-primary">Annuler</a>
+				 <a href="/adresse/listeDepartements" class="btn btn-primary">Annuler</a>
 				<!--
 				<button th:href="@{/adresse/listeRegions}" class="btn btn-primary">Annuler</button> 
 				  -->

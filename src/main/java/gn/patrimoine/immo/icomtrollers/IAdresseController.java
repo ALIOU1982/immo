@@ -5,7 +5,7 @@ package gn.patrimoine.immo.icomtrollers;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import gn.patrimoine.immo.form.RegionForm;
+import gn.patrimoine.immo.form.DepartementForm;
 
 /**
  * @author user
@@ -13,10 +13,10 @@ import gn.patrimoine.immo.form.RegionForm;
  */
 public interface IAdresseController {
 	
-	public String allRegions(Model model);
+	public String allDepartements(Model model);
 	
-	public String creerRegion(Model model);
+	public String creerDepartement(Model model);
 	
-	public String saveRegion( RegionForm regionForm, BindingResult bindingResult, Model model);
+	public String saveDepartement( DepartementForm departementForm, BindingResult bindingResult, Model model);
 
 }

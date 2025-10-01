@@ -37,8 +37,8 @@ public class Commune {
 	private String nomCommune;
 	
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
-	@JoinColumn(name = "region_id", nullable=false)
-	private Region region;
+	@JoinColumn(name = "departement_id", nullable=false)
+	private Departement departement;
 	
 	@OneToMany(mappedBy="commune", cascade=CascadeType.REMOVE, orphanRemoval= true)
 	private List<Adresse> adresses;

@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 
 	<head>
-		<title>Liste de toutes les régions</title>
+		<title>Liste de toutes les préfectures</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Adresse</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -10,24 +10,24 @@
 	
 	<body>
 		<div class="container">
-			<h1>Création des Régions et Communes</h1>
-			<a href="/adresse/creeRegion" class="btn btn-primary">Ajouter region</a>
+			<h1>Création des Préfectures et Communes</h1>
+			<a href="/adresse/creeDepartement" class="btn btn-primary">Ajouter préfecture</a>
 			
 			<table class="table mt3">
 				<thead>
 				
 				<tr>
-					<th>Nom Région</th>
+					<th>Nom Préfecture</th>
 					<th>Actions</th>
 				</tr>
 				
 				</thead>
 				<tbody>
-					<tr th:each="region, status: ${regions}">
-						<td th:text="${region.nomRegion}"></td>
+					<tr th:each="departement, status: ${departements}">
+						<td th:text="${departement.nomDepartement}"></td>
 						<td> 
-							<a th:href="@{/adresse/editeRegion/{id}(id=${region.id})}" >Modifier</a>
-							<a th:href="@{/adresse/supprimeRegion/{id}(id=${region.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
+							<a th:href="@{/adresse/editeDepartement/{id}(id=${departement.id})}" >Modifier</a>
+							<a th:href="@{/adresse/supprimeDepartement/{id}(id=${departement.id})}" class="btn btn-primary" th:method="post">Supprimer</a>
 						 </td>
 					</tr>
 				</tbody>
@@ -44,7 +44,7 @@
 				
 				<tr>
 					<th>Nom commune</th>
-					<th>Nom Régions</th>
+					<th>Nom Préfecture</th>
 					<th>Actions</th>
 				</tr>
 				
@@ -52,7 +52,7 @@
 				<tbody>
 					<tr th:each="commune, status: ${communes}">
 						<td th:text="${commune.nomCommune}"></td> 
-						<td th:text="${commune.regionDto.nomRegion}"></td>
+						<td th:text="${commune.departementDto.nomDepartement}"></td>
 						<td>
 							<a th:href="@{/adresse/editeCommune/{id}(id=${commune.id})}" >Modifier</a>
 							<a th:href="@{/adresse/supprimeCommune/{id}(id=${commune.id})}" class="btn btn-primary" th:method="post">Supprimer</a>

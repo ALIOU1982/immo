@@ -25,16 +25,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Region {
+public class Departement {
 	
 	@jakarta.persistence.Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id;
 	
 	@Column(length=40)
-	private String nomRegion;
+	private String nomDepartement;
 	
-	@OneToMany(mappedBy="region", orphanRemoval=true, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="departement", orphanRemoval=true, cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Commune> communes;
 
 }

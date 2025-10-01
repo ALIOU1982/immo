@@ -8,16 +8,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import gn.patrimoine.immo.entities.Region;
+import gn.patrimoine.immo.entities.Departement;
 
 /**
  * @author user
  *
  */
-public interface RegionRepository extends JpaRepository<Region, Long>{
+public interface DepartementRepository extends JpaRepository<Departement, Long>{
 	
 	@Modifying
-	@Query("update Region r set r.nomRegion = :nomRegion where r.id = :id")
-	void updateRegion(@Param(value = "id") Long id, @Param(value = "nomRegion") String nomRegion);
+	@Query("update Departement r set r.nomDepartement = :nomDepartement where r.id = :id")
+	void updateDepartement(@Param(value = "id") Long id, @Param(value = "nomDepartement") String nomDepartement);
 
 }

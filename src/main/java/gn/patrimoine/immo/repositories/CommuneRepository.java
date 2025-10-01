@@ -9,13 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import gn.patrimoine.immo.entities.Commune;
-import gn.patrimoine.immo.entities.Region;
+import gn.patrimoine.immo.entities.Departement;
 
 public interface CommuneRepository extends JpaRepository<Commune, Long> {
 	
 	@Modifying
-	@Query("update Commune c set c.region = :region where c.id = :id")
-	void updateCommune(@Param(value = "id") Long id, @Param(value = "nomCommune") String nomCommune, @Param(value = "region") Region region);
+	@Query("update Commune c set c.departement = :departement where c.id = :id")
+	void updateCommune(@Param(value = "id") Long id, @Param(value = "nomCommune") String nomCommune, @Param(value = "region") Departement departement);
 	
-	List<Commune> findByRegion(Region region);
+	List<Commune> findByDepartement(Departement departement);
 }
